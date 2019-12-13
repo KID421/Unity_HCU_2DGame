@@ -14,7 +14,19 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        ani = GetComponent<Animator>();
-        r2d = GetComponent<Rigidbody2D>();
+        ani = GetComponent<Animator>();         // 動畫元件 = 取得元件<動畫元件>()
+        r2d = GetComponent<Rigidbody2D>();      // 剛體元件 = 取得元件<剛體元件>()
+    }
+
+    // 一秒執行 50 次
+    private void FixedUpdate()
+    {
+        Move();
+    }
+
+    private void Move()
+    {
+        
+        r2d.AddForce(new Vector2(speed, 0));    // 剛體.推力(二為向量(左右，上下))
     }
 }
