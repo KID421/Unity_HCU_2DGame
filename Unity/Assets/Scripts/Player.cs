@@ -7,15 +7,21 @@ public class Player : MonoBehaviour
     public float speed = 1.5f;
     [Header("血量"), Range(100, 1000)]
     public float hp = 100;
+    [Header("子彈物件")]
+    public GameObject bullte;
+    [Header("發射音效")]
+    public AudioClip soundFire;
 
     private Animator ani;
     private Rigidbody2D r2d;
+    private AudioSource aud;
     #endregion
 
     private void Start()
     {
         ani = GetComponent<Animator>();         // 動畫元件 = 取得元件<動畫元件>()
         r2d = GetComponent<Rigidbody2D>();      // 剛體元件 = 取得元件<剛體元件>()
+        aud = GetComponent<AudioSource>();      // 音源元件 = 取得元件<音源元件>()
     }
 
     // 一秒執行 50 次
