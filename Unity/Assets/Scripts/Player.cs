@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        
-        r2d.AddForce(new Vector2(speed, 0));    // 剛體.推力(二為向量(左右，上下))
+        float h = Input.GetAxisRaw("Horizontal");   // 左 A -1、右 D 1、沒按 0
+        r2d.AddForce(new Vector2(speed * h, 0));    // 剛體.推力(二為向量(左右，上下))
     }
 }
