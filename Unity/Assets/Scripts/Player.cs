@@ -8,7 +8,13 @@ public class Player : MonoBehaviour
     [Header("血量"), Range(100, 1000)]
     public float hp = 100;
 
-    public Animator ani;
-    public Rigidbody2D r2d;
+    private Animator ani;
+    private Rigidbody2D r2d;
     #endregion
+
+    private void Start()
+    {
+        ani = GetComponent<Animator>();
+        r2d = GetComponent<Rigidbody2D>();
+    }
 }
