@@ -11,27 +11,30 @@ public class Player : MonoBehaviour
     public GameObject bullte;
     [Header("發射音效")]
     public AudioClip soundFire;
-
+    [Header("子彈發射位置")]
     public Transform point;
+    [Header("子彈速度"), Range(500, 3000)]
+    public float speedBullet = 1000;
 
     private Animator ani;
     private Rigidbody2D r2d;
     private AudioSource aud;
     #endregion
 
+
+    // 初始事件：遊戲開始執行一次
     private void Start()
     {
         ani = GetComponent<Animator>();         // 動畫元件 = 取得元件<動畫元件>()
         r2d = GetComponent<Rigidbody2D>();      // 剛體元件 = 取得元件<剛體元件>()
         aud = GetComponent<AudioSource>();      // 音源元件 = 取得元件<音源元件>()
     }
-
-    // 一秒執行 50 次
+    // 固定更新事件：一秒執行 50 次
     private void FixedUpdate()
     {
         Move();
     }
-    // 一秒執行 60 次
+    // 更新事件：一秒約執行 60 次
     private void Update()
     {
         Fire();
@@ -46,10 +49,11 @@ public class Player : MonoBehaviour
 
     private void Fire()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0))                                                                   // 如果 按下 左鍵
         {
-            aud.PlayOneShot(soundFire);
-            Instantiate(bullte, point.position, Quaternion.identity);
+            aud.PlayOneShot(soundFire);                                                                         // 音源.播放一次音效(音效)
+            GameObject temp = Instantiate(bullte, point.position, Quaternion.identity);                         // 暫存子彈 = 實例化(物件，座標，角度) - Quaternion.identity 零度角
+            temp.GetComponent<Rigidbody2D>().AddForce(new Vector2(speedBullet * transform.localScale.x, 80));   // 站存子彈.取得元件<剛體>().推力(玩家X * 速度)
         }
     }
 }
